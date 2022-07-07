@@ -1,0 +1,29 @@
+### Recipes Index
+
+GET http://localhost:3000/products.json
+
+### Recipes Show
+GET http://localhost:3000/products/3.json
+
+### Recipes Create
+POST http://localhost:3000/products.json
+Content-Type: application/json
+
+{
+  "name": "test_name",
+  "price": "test_price",
+  "image_url": "test_image_url",
+  "description": "test_description"
+}
+
+### Recipes Update
+PATCH http://localhost:3000/products/3.json
+Content-Type: application/json
+
+{
+  "price": 150
+}
+
+
+### Recipes Destroy
+DELETE http://localhost:3000/products/4.json

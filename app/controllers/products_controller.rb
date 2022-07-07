@@ -1,26 +1,39 @@
 class ProductsController < ApplicationController
-  def all_products
-    product = Product.all
-    render json: product
+  def index
+    @products = Product.all
+    render template: "products/index"
   end
 
-  def product1
-    product1 = Product.first
-    render json: product1
+  def any_product
+    @product = Product.find_by(id: params[:id])
+    render template: "products/show"
   end
 
-  def product2
-    product2 = Product.second
-    render json: product2
+  def create
+    @product = Product.create(
+      name: params["name"],
+      price: params["price"],
+      image_url: params["image_url"],
+      description: params["description"],
+    )
+    render template: "products/show"
   end
 
-  def product3
-    product3 = Product.third
-    render json: product3
+  def update
+    product_id = params["id"]
+    @product = Product.find_by(id: product_id)
+
+    @product.name = params["name"] || @product.name
+    @product.price = params["price"] || @product.price
+    @product.image_url = params["image_url"] || @product.image_url
+    @product.description = params["description"] || @product.description
+    @product.save
+    render template: "products/show"
   end
 
-  def product4
-    product4 = Product.fourth
-    render json: product4
+  def destroy
+    product = Product.find_by(id: params[:id])
+    product.destroy
+    render json: { message: "Gone and Gooooone" }
   end
 end
